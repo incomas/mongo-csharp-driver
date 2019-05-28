@@ -1,5 +1,6 @@
 # Visual Studio artifacts
-bin
+# InCommodities change (we use DLLs, so src/bins are included to git)
+tests/**/bin
 obj
 *.user
 *.suo

@@ -94,7 +94,9 @@ namespace MongoDB.Bson.Serialization.Serializers
                     {
                         return binaryData.ToGuid();
                     }
-                    goto default;
+                    // InCommodities change (previously byte array was not returned)
+                    //goto default;
+                    return binaryData.AsByteArray;
 
                 case BsonType.Boolean:
                     return bsonReader.ReadBoolean();
@@ -128,6 +130,10 @@ namespace MongoDB.Bson.Serialization.Serializers
 
                 case BsonType.String:
                     return bsonReader.ReadString();
+
+                // InCommodities change (previously Timestamp was not supported)
+                case BsonType.Timestamp:
+                    return bsonReader.ReadTimestamp();
 
                 default:
                     var message = string.Format("ObjectSerializer does not support BSON type '{0}'.", bsonType);
